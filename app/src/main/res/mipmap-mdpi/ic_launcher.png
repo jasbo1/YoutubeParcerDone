@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <item name="java.io.BufferedInputStream BufferedInputStream(java.io.InputStream) 0">
+    <annotation name="org.jetbrains.annotations.NotNull" />
+  </item>
+  <item name="java.io.BufferedInputStream BufferedInputStream(java.io.InputStream, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull" />
+  </item>
+  <item name="java.io.BufferedInputStream int read()">
+    <annotation name='org.jetbrains.annotations.Range'>
+      <val name="from" val="-1"/>
+      <val name="to" val="255"/>
+    </annotation>
+  </item>
+  <item name="java.io.BufferedInputStream int read(byte[], int, int)">
+    <annotation name='org.jetbrains.annotations.Range'>
+      <val name="from" val="-1"/>
+      <val name="to" val="java.lang.Integer.MAX_VALUE"/>
+    </annotation>
+  </item>
+  <item name="java.io.BufferedInputStream int read(byte[], int, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull" />
+  </item>
+  <item name="java.io.BufferedOutputStream BufferedOutputStream(java.io.OutputStream) 0">
+    <annotation name="org.jetbrains.annotations.NotNull" />
+  </item>
+  <item name="java.io.BufferedOutputStream BufferedOutputStream(java.io.OutputStream, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull" />
+  </item>
+  <item name="java.io.BufferedOutputStream void write(byte[], int, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull" />
+  </item>
+  <item name="java.io.BufferedReader BufferedReader(java.io.Reader) 0">
+    <annotation name="org.jetbrains.annotations.NotNull" />
+  </item>
+  <item name="java.io.BufferedReader BufferedReader(java.io.Reader, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull" />
+  </item>
+  <item name="java.io.BufferedReader int read()">
+    <annotation name='org.jetbrains.annotations.Range'>
+      <val name="from" val="-1"/>
+      <val name="to" val="0xFFFF"/>
+    </annotation>
+  </item>
+  <item name="java.io.BufferedReader int read(char[], int, int)">
+    <annotation name='org.jetbrains.annotations.Range'>
+      <val nam
