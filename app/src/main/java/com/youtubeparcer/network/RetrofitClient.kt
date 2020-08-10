@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class RetrofitClient() {
+class RetrofitClient {
     companion object {
 
         private const val BASE_URL = "https://www.googleapis.com/youtube/"

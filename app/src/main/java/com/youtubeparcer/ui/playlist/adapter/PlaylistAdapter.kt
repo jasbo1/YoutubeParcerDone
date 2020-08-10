@@ -1,4 +1,4 @@
-package com.youtubeparcer.ui.adapter
+package com.youtubeparcer.ui.playlist.adapter
 
 
 import android.content.Context
@@ -23,11 +23,10 @@ class PlaylistAdapter(private val listener: Listener) :
         return ViewHolder(view, parent.context)
     }
 
- fun addItems(list: MutableList<PlaylistItem>){
-    list.addAll(list)
-    notifyDataSetChanged()
-}
-
+    fun addItems(list: MutableList<PlaylistItem>) {
+        this.list.addAll(list)
+        notifyDataSetChanged()
+    }
 
 
     override fun getItemCount(): Int {
@@ -42,18 +41,21 @@ class PlaylistAdapter(private val listener: Listener) :
 
         fun bind(item: PlaylistItem, listener: Listener) {
 
+
             itemView.image.loadImage(context, item.snippet?.thumbnails?.high?.url)
             itemView.tittle.text = item.snippet?.channelTitle
-            itemView.subtittle.text = item.contentDetails?.itemCount + "videos in playlist"
-            itemView.setOnClickListener { listener.onItemClick(item) }
+            itemView.subtittle.text = item.contentDetails?.itemCount + " videos in playlist"
+            itemView.setOnClickListener {
+                listener.onItemClick(item)
 
+            }
         }
+
+
     }
 
     interface Listener {
-
         fun onItemClick(dto: PlaylistItem)
 
     }
-
 }
