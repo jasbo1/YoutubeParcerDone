@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,12 +8,15 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.detail_playlist.DetailPlaylistActivity">
 
+
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarlayout"
         android:layout_width="match_parent"
         android:layout_height="196dp"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark">
+        android:theme="@style/ThemeOverlay.MaterialComponents.Light">
+
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsToolbar"
@@ -21,8 +25,15 @@
             android:fitsSystemWindows="true"
             app:contentScrim="@color/colorPrimary"
             app:expandedTitleMarginBottom="20dp"
-            app:expandedTitleMarginStart="16dp"
+            app:expandedTitleMarginEnd="64dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/detail_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                app:layout_collapseMode="pin"
+                app:title="TOOLBAR"/>
 
 
             <TextView
@@ -45,27 +56,20 @@
                 android:text="@string/detail_subtitle"
                 android:textSize="15dp" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/detail_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                app:layout_collapseMode="pin" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_play_button"
         app:layout_anchor="@id/appBarlayout"
-        app:layout_anchorGravity="bottom|right|end">
-
-    </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
+        app:layout_anchorGravity="bottom|right|end" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -73,11 +77,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:scrollbars="vertical"
-            tools:listitem="@layout/activity_detail_playlist"/>
+            tools:listitem="@layout/activity_detail_playlist" />
 
 
     </androidx.core.widget.NestedScrollView>

@@ -8,53 +8,54 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.youtubeparcer.R
+import com.youtubeparcer.base.BaseActivity
 import com.youtubeparcer.extension.showToast
 import com.youtubeparcer.model.PlaylistItem
 import com.youtubeparcer.ui.detail_playlist.adapter.DetailPlaylistAdapter
 import kotlinx.android.synthetic.main.activity_detail_playlist.*
 
-class DetailPlaylistActivity : AppCompatActivity(),DetailPlaylistAdapter.Listener {
 
+class DetailPlaylistActivity : BaseActivity(R.layout.activity_detail_playlist),
 
+    DetailPlaylistAdapter.Listener {
+
+    private lateinit var viewModel: DetailPlaylistViewModel
     private var adapter: DetailPlaylistAdapter? = DetailPlaylistAdapter(this)
 
-    private  var viewModel: DetailPlaylistViewModel? = null
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_playlist)
+    override fun setupUI() {
         viewModel = ViewModelProviders.of(this).get(DetailPlaylistViewModel::class.java)
-
-        setupView()
-        subscribeToLiveData()
-        showToast(id.toString())
-    }
-
-    private fun setupView() {
         setupAdapter()
     }
-
     private fun setupAdapter() {
-        detail_rview.layoutManager = LinearLayoutManager(applicationContext)
+
+        detail_rview.layoutManager = LinearLayoutManager(this)
         detail_rview.adapter = adapter
 
     }
+
+
     override fun onItemClick(dto: PlaylistItem) {
+        //instance DetailVideoActivity.instance(this,dto.snipper?.resourceId?.videoId)
 
     }
 
-    private fun subscribeToLiveData() {
+    override fun setupLiveData() {
         subscribeToDetailPlaylist()
     }
 
-    private fun subscribeToDetailPlaylist() {
-        id?.let { viewModel?.fetchDetailPlaylist(it)?.observe(this, Observer {
-            adapter?.addItems(it?.items!!)
 
-        }) }
+    private fun subscribeToDetailPlaylist() {
+        id?.let {
+            viewModel.fetchDetailPlaylist(it).observe(this, Observer {
+                adapter?.addItems(it?.items!!)
+
+            })
+        }
+
 
     }
+
 
     companion object {
         private var id: String? = null
@@ -65,7 +66,6 @@ class DetailPlaylistActivity : AppCompatActivity(),DetailPlaylistAdapter.Listene
         }
 
     }
-
 
 
 }
