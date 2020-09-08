@@ -1,90 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".ui.detail_playlist.DetailPlaylistActivity">
-
+    android:background="@android:color/background_light"
+    android:fitsSystemWindows="true">
 
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarlayout"
+        android:id="@+id/main.appbar"
         android:layout_width="match_parent"
-        android:layout_height="196dp"
+        android:layout_height="300dp"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Light">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsToolbar"
+            android:id="@+id/main.collapsing"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/white"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/colorPrimary"
-            app:expandedTitleMarginBottom="20dp"
             app:expandedTitleMarginEnd="64dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/detail_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                app:layout_collapseMode="pin"
-                app:title="TOOLBAR"/>
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar_detail_playlist" />
 
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginTop="23dp"
-                android:fontFamily="@font/fjalla_one"
+                android:layout_marginTop="90dp"
+                android:padding="16dp"
                 android:text="@string/Detail_title"
-                android:textSize="24dp" />
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
 
             <TextView
+                android:id="@+id/sub_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="100dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="@font/noto_sans"
+                android:layout_marginTop="160dp"
+                android:padding="16dp"
                 android:text="@string/detail_subtitle"
-                android:textSize="15dp" />
-
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_play_button"
-        app:layout_anchor="@id/appBarlayout"
-        app:layout_anchorGravity="bottom|right|end" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/detail_rview"
+            android:id="@+id/detail_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:scrollbars="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/activity_detail_playlist" />
+            tools:listitem="@layout/item_detail_playlist" />
 
 
     </androidx.core.widget.NestedScrollView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/colorAccent"
+
+        android:src="@drawable/ic_play_button"
+        app:layout_anchor="@id/main.appbar"
+        app:layout_anchorGravity="bottom|right|end" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

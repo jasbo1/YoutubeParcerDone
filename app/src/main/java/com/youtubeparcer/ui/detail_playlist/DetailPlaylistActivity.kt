@@ -12,31 +12,35 @@ import com.youtubeparcer.base.BaseActivity
 import com.youtubeparcer.extension.showToast
 import com.youtubeparcer.model.PlaylistItem
 import com.youtubeparcer.ui.detail_playlist.adapter.DetailPlaylistAdapter
+import com.youtubeparcer.ui.detail_video.DetailVideoActivity
+import com.youtubeparcer.ui.playlist.PlaylistViewModel
 import kotlinx.android.synthetic.main.activity_detail_playlist.*
+import org.koin.android.ext.android.inject
 
 
 class DetailPlaylistActivity : BaseActivity(R.layout.activity_detail_playlist),
 
     DetailPlaylistAdapter.Listener {
 
-    private lateinit var viewModel: DetailPlaylistViewModel
+   // private lateinit var viewModel: DetailPlaylistViewModel
     private var adapter: DetailPlaylistAdapter? = DetailPlaylistAdapter(this)
+    private val viewModel by inject <DetailPlaylistViewModel>()
 
 
     override fun setupUI() {
-        viewModel = ViewModelProviders.of(this).get(DetailPlaylistViewModel::class.java)
+        //viewModel = ViewModelProviders.of(this).get(DetailPlaylistViewModel::class.java)
         setupAdapter()
     }
     private fun setupAdapter() {
 
-        detail_rview.layoutManager = LinearLayoutManager(this)
-        detail_rview.adapter = adapter
+        detail_recycler_view.layoutManager = LinearLayoutManager(this)
+        detail_recycler_view.adapter = adapter
 
     }
 
 
     override fun onItemClick(dto: PlaylistItem) {
-        //instance DetailVideoActivity.instance(this,dto.snipper?.resourceId?.videoId)
+       DetailVideoActivity.instance(this,dto.snippet?.resourceId?.videoId)
 
     }
 

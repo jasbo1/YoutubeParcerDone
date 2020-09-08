@@ -1,32 +1,44 @@
 package com.youtubeparcer.network
 
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class RetrofitClient {
-    companion object {
-
-        private const val BASE_URL = "https://www.googleapis.com/youtube/"
+class RetrofitClient(private var okHttpClient: OkHttpClient?) {
 
 
-        fun create(): YoutubeApi? {
-            val okHttpClient = OkHttpClient().newBuilder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .build()
+    private val BASE_URL = "https://www.googleapis.com/youtube/"
 
-            val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
-                .build()
-            return retrofit.create(YoutubeApi::class.java)
-        }
-
+    fun provideRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("$BASE_URL")
+            .client(okHttpClient)
+            .build()
     }
+
 }
 
 
+fun provideOkHttpClient(httpLogging: HttpLoggingInterceptor): OkHttpClient {
+
+    return OkHttpClient()
+        .newBuilder()
+        .addInterceptor(httpLogging)
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(30, TimeUnit.SECONDS)
+        .build()
+
+}
+
+
+fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+    return HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
+
+    }
+
+}

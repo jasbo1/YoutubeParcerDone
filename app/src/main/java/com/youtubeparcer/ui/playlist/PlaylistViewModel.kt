@@ -5,11 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.youtubeparcer.model.Playlist
 import com.youtubeparcer.repository.PlaylistRepository
-private val repository = PlaylistRepository()
 
 
 
-class PlaylistViewModel : ViewModel() {
+
+class PlaylistViewModel (private  var repository: PlaylistRepository) : ViewModel() {
     fun fetchPlaylist(): LiveData<Playlist?> {
         return repository.fetchYoutubePlaylist()
 

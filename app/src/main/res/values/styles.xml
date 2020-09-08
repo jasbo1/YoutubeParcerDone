@@ -11,5 +11,6 @@
     <style name="Platform.MaterialComponents.Dark">dark</style>
 
     <style name="AppTheme.PopupOverlay">toolbartheme</style>
+    <style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert"/>
 
 </resources>

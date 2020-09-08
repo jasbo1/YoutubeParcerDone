@@ -57,5 +57,11 @@ dependencies {
 
     implementation "org.koin:koin-androidx-viewmodel:2.0.1"
     implementation "org.koin:koin-core:2.0.1"
+//player
+    implementation 'com.google.android.exoplayer:exoplayer:2.8.4'
+    //interceptor
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+    // for exoplayer
+    implementation 'com.github.HaarigerHarald:android-youtubeExtractor:2.1.0'
 
 }

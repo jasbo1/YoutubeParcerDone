@@ -11,7 +11,7 @@ interface YoutubeApi {
     @GET("v3/playlists")
 
     fun fetchAllPlaylists(
-        @Query("part") part: String,
+        @Query("part",encoded=true) part: String,
         @Query("key") apiKey: String,
         @Query("channelId") channelId: String,
         @Query("maxResult") maxResult: String
@@ -27,4 +27,11 @@ interface YoutubeApi {
 
     ): Call<Playlist>
 
+    @GET("v3/videos")
+
+    fun getDetailVideo(
+        @Query("key") apiKey: String,
+        @Query("part") part: String,
+        @Query("id") id: String
+    ): Call<Playlist>
 }
