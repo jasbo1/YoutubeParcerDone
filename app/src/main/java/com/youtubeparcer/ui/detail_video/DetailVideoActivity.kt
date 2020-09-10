@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.util.SparseArray
+import android.view.MenuItem
 import androidx.lifecycle.Observer
 import at.huber.youtubeExtractor.VideoMeta
 import at.huber.youtubeExtractor.YouTubeExtractor
@@ -11,6 +12,8 @@ import at.huber.youtubeExtractor.YtFile
 import com.google.android.exoplayer2.Player
 import com.youtubeparcer.R
 import com.youtubeparcer.base.BaseActivity
+import com.youtubeparcer.dialog.DownloadDialog
+import com.youtubeparcer.extension.showToast
 import com.youtubeparcer.model.Playlist
 import com.youtubeparcer.model.PlaylistItem
 import com.youtubeparcer.utils.CallBacks
@@ -19,7 +22,7 @@ import com.youtubeparcer.utils.YoutubeVideo
 import kotlinx.android.synthetic.main.activity_detail_video.*
 import org.koin.android.ext.android.inject
 
-class DetailVideoActivity : BaseActivity(R.layout.activity_detail_video), CallBacks {
+class DetailVideoActivity : BaseActivity(R.layout.activity_detail_video), CallBacks, DownloadDialog.Listener {
 
 
     private val viewModel by inject<DetailVideoViewModel>()
@@ -30,7 +33,12 @@ class DetailVideoActivity : BaseActivity(R.layout.activity_detail_video), CallBa
     override fun setupUI() {
         setupExoPlayer()
         downloadAction()
-        //setupToolbar()
+        setupToolbar()
+    }
+
+    private fun setupToolbar(){
+        if (supportActionBar != null)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun setupExoPlayer() {
@@ -39,7 +47,17 @@ class DetailVideoActivity : BaseActivity(R.layout.activity_detail_video), CallBa
     }
 
     private  fun downloadAction(){
-        download.setOnClickListener {  }
+        download.setOnClickListener {
+            DownloadDialog(this, this, listOfFormatVideo).show()
+        }
+    }
+    override fun downloadedItem(dto: YoutubeVideo?) {
+        if (!dto?.audioFile?.url.isNullOrEmpty()) downloadFile(dto?.audioFile?.url)
+        if (!dto?.videoFile?.url.isNullOrEmpty()) downloadFile(dto?.videoFile?.url)
+        showToast(dto.toString())
+    }
+    private fun downloadFile(url: String?) {
+
     }
 
     override fun setupLiveData() {
@@ -157,4 +175,5 @@ class DetailVideoActivity : BaseActivity(R.layout.activity_detail_video), CallBa
 
     override fun onPlayingEnd() {
     }
+
 }
